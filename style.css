@@ -86,13 +86,6 @@ main{
     transform: scale(1.14);
 }
 
-/* .showDetail{
-    -ms-transform: scale(1.1); 
-    -webkit-transform: scale(1.1); 
-    transform: scale(1.1);
-    background-color: rgba(46, 40, 64, 0.838)!important;
-} */
-
 .active{
     background-color:#EDEAE0!important;
     opacity: 1;
@@ -128,5 +121,4 @@ padding: 0;
 
 input[type="range"] {
 margin: 0;
-
 }

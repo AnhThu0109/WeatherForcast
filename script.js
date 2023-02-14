@@ -20,6 +20,7 @@ function searchLocationWeather() {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
+            document.getElementById("main").style.height = "";
             showDay(data);          
             showHrsRange();
             showInfo(data, 0);
@@ -68,7 +69,6 @@ const clearContent = () => {
   displayWeekDay.innerHTML = "";
   showHourInfo.innerHTML = "";
   showHourRange.innerHTML = "";
-  document.getElementById("main").style.height = "";
 };
 
 //Change date format
