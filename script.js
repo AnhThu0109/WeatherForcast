@@ -53,7 +53,7 @@ function searchLocationWeather() {
             //Click day for detail
             for (let i = 0; i < displayDays.length; i++) {             
               displayDays[i].addEventListener("click", () => {
-                addActiveClass(data, i);
+                addremoveActiveClass(data, i);
                 showDetail(data, i);
                 showInfo(data, i, h);
                 showWeatherIcon(data.forecast.forecastday);
@@ -74,6 +74,7 @@ function searchLocationWeather() {
           });
       }
     } else {
+      mainPart.style.height = "1000px";
       errMess.innerText = "Please enter your location first!";
     }
   } catch (error) {
@@ -132,7 +133,7 @@ const showDay = (data) => {
 };
 
 //Add active class to chosen day
-const addActiveClass = (data, currentIndex) => {
+const addremoveActiveClass = (data, currentIndex) => {
   for (let i = 0; i < displayDays.length; i++) {
     if (i != currentIndex) {
       displayDays[i].classList.remove("active");
