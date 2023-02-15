@@ -21,12 +21,15 @@ function searchLocationWeather() {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
+            //reset height of main tag
             document.getElementById("main").style.height = "";
-            showDay(data);
-            showHrsRange();
-            showInfo(data, 0);
-            showWeatherIcon(data.forecast.forecastday);
-            showHrsWeatherIcon(data, 0);
+            showDay(data);//Show weekdays briefly
+            showHrsRange();//Show hour range
+            showInfo(data, 0);//Show info of day 1
+            showWeatherIcon(data.forecast.forecastday);//Show weather icon for weekdays
+            showHrsWeatherIcon(data, 0);//Show weather icon in info part of day 1
+            
+            //Add event change for hour range
             let inputRange = document.getElementById("hour");
             inputRange.addEventListener("change", () => {
               showInfo(data, 0);
@@ -81,7 +84,7 @@ const changeFormatDate = (date) => {
   return newDate.toLocaleDateString("en-us", options);
 };
 
-//Show day
+//Show weekdays briefly
 const showDay = (data) => {
   for (let i = 0; i < data.forecast.forecastday.length; i++) {
     if (i == 0) {
@@ -186,6 +189,7 @@ const showDetail = (data, currentIndex) => {
     `;
 };
 
+//Display weather icon according to weather text
 const displayIcon = (text, display) => {
   if (text.includes("sunny") || text == "Sunny") {
     display = `<i class="fa-solid fa-sun sunnyColor"></i>`;
@@ -268,7 +272,7 @@ const showHrsRange = () => {
     `;
 };
 
-//Add background color for selected btn
+//Add background color for selected temp btn
 const changeBgTempBtn = (index) => {
   for (let i = 0; i < changeTempBtn.length; i++) {
     if (i == index) {
