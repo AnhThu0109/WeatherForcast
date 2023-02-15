@@ -1,124 +1,126 @@
-:root{
-    --wheat: #E6D0ABff;
-    --darker-wheat: #E6B288ff;
+:root {
+  --wheat: #e6d0abff;
+  --darker-wheat: #e6b288ff;
 }
 
-body{
-    background-color: rgba(46, 40, 64, 0.838);
+body {
+  background-color: rgba(46, 40, 64, 0.838);
 }
 
-main{
-    background-image: url(./images/photo-1496450681664-3df85efbd29f.jpg);
-    /* height: 1000px; */
-    background-repeat: no-repeat;
-    background-size: cover;
+main {
+  background-image: url(./images/photo-1496450681664-3df85efbd29f.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-#header h1{
-    color: var(--darker-wheat);
+#header h1 {
+  color: var(--darker-wheat);
 }
 
-.searchbar{
-    margin-bottom: auto;
-    margin-top: auto;
-    height: 60px;
-    background-color: #353b48;
-    border-radius: 30px;
-    padding: 10px;
-    justify-content: space-between !important;
-    }
-
-    .search_input{
-    padding: 0 10px;
-    width: 100%;
-    border: 0;
-    outline: 0;
-    background: none;
-    line-height: 40px;
-    cursor: text;
-    }
-
-#submitBtn{
-   background-color: var(--wheat);
-   color: #353b48;
+.searchbar {
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 60px;
+  background-color: #353b48;
+  border-radius: 30px;
+  padding: 10px;
+  justify-content: space-between !important;
 }
 
-#showWeekDay, #showHourRange, #showInfo{
-    padding: 0;
-    margin: 0;
+.search_input {
+  padding: 0 10px;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: none;
+  line-height: 40px;
+  cursor: text;
 }
 
-.location{
-    color: var(--darker-wheat);
+#submitBtn {
+  background-color: var(--wheat);
+  color: #353b48;
 }
 
-.temp{
-    color: rgb(207, 150, 147);
+#showWeekDay,
+#showHourRange,
+#showInfo {
+  padding: 0;
+  margin: 0;
 }
 
-.iconWeather{
-    font-size: 35px;
+.location {
+  color: var(--darker-wheat);
 }
 
-.sunnyColor{
-    color: #F59300;
+.temp {
+  color: rgb(207, 150, 147);
 }
 
-.cloudyColor{
-    color: #00BFFF;
+.iconWeather {
+  font-size: 35px;
 }
 
-.rainnyColor{
-    color: #1F75FE;
+.sunnyColor {
+  color: #f59300;
 }
 
-
-.showDays{
-    transition: transform .2s;
-    background-color: #353b48 !important;
-    opacity: 0.75;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+.cloudyColor {
+  color: #00bfff;
 }
 
-.showDays:hover{
-    -ms-transform: scale(1.14); 
-    -webkit-transform: scale(1.14); 
-    transform: scale(1.14);
+.rainnyColor {
+  color: #1f75fe;
 }
 
-.active{
-    background-color:#EDEAE0!important;
-    opacity: 1;
-    border-top: 7px solid #feb729;
-    text-align: left !important;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    transform: scale(1.14);
-    line-height: 1.7;
-    padding-bottom: 30px !important;
-    transition: 0.3s ease-out;
+.showDays {
+  transition: transform 0.2s;
+  background-color: #353b48 !important;
+  opacity: 0.75;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-.active h4{
-    color: black!important;
+.showDays:hover {
+  -ms-transform: scale(1.14);
+  -webkit-transform: scale(1.14);
+  transform: scale(1.14);
 }
 
-.active .location{
-    color: black!important;
+.active {
+  background-color: #edeae0 !important;
+  opacity: 1;
+  border-top: 7px solid #feb729;
+  text-align: left !important;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  transform: scale(1.14);
+  line-height: 1.7;
+  padding-bottom: 30px !important;
+  transition: 0.3s ease-out;
+}
+
+.active h4 {
+  color: black !important;
+}
+
+.active .location {
+  color: black !important;
 }
 
 /* Input range */
 datalist {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    writing-mode: horizontal-tb;
-    width: 200px;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  writing-mode: horizontal-tb;
+  width: 200px;
+}
+
 option {
-padding: 0;
+  padding: 0;
 }
 
 input[type="range"] {
-margin: 0;
+  margin: 0;
 }

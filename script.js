@@ -22,17 +22,17 @@ function searchLocationWeather() {
           .then((data) => {
             console.log(data);
             document.getElementById("main").style.height = "";
-            showDay(data);          
+            showDay(data);
             showHrsRange();
             showInfo(data, 0);
             showWeatherIcon(data.forecast.forecastday);
             showHrsWeatherIcon(data, 0);
             let inputRange = document.getElementById("hour");
             inputRange.addEventListener("change", () => {
-                showInfo(data, 0);
-                showHrsWeatherIcon(data, 0);
-            })
-            
+              showInfo(data, 0);
+              showHrsWeatherIcon(data, 0);
+            });
+
             //Click day for detail
             for (let i = 0; i < displayDays.length; i++) {
               displayDays[i].addEventListener("click", () => {
@@ -43,12 +43,11 @@ function searchLocationWeather() {
                 showHrsWeatherIcon(data, i);
                 //On change input range
                 inputRange.addEventListener("change", () => {
-                    showInfo(data, i);
-                    showHrsWeatherIcon(data, i);
-                })
+                  showInfo(data, i);
+                  showHrsWeatherIcon(data, i);
+                });
               });
             }
-            
           })
           .catch((err) => {
             console.log(err);
@@ -119,7 +118,11 @@ const addActiveClass = (data, currentIndex) => {
   for (let i = 0; i < displayDays.length; i++) {
     if (i != currentIndex) {
       displayDays[i].classList.remove("active");
-      displayDays[i].classList.add("align-items-center", "flex-column", "d-flex");
+      displayDays[i].classList.add(
+        "align-items-center",
+        "flex-column",
+        "d-flex"
+      );
       if (i == 0) {
         displayDays[0].innerHTML = `
                 <h4 class="text-white">Today &nbsp;&nbsp;&nbsp; ${changeFormatDate(
@@ -143,7 +146,11 @@ const addActiveClass = (data, currentIndex) => {
       }
     } else {
       displayDays[i].classList.add("active");
-      displayDays[i].classList.remove("flex-column", "d-flex", "align-items-center");
+      displayDays[i].classList.remove(
+        "flex-column",
+        "d-flex",
+        "align-items-center"
+      );
     }
   }
 };
@@ -159,33 +166,28 @@ const showDetail = (data, currentIndex) => {
       data.forecast.forecastday[currentIndex].day.maxtemp_c
     }<sup>o</sup>C </span>&nbsp;&nbsp;<span class="iconWeather"></span></h1>
     <i class="fa-solid fa-umbrella"></i>&nbsp;${
-        data.forecast.forecastday[currentIndex].day.daily_chance_of_rain
+      data.forecast.forecastday[currentIndex].day.daily_chance_of_rain
     } %&nbsp;
     <i class="fa-solid fa-droplet"></i>&nbsp;${
-        data.forecast.forecastday[currentIndex].day.avghumidity
+      data.forecast.forecastday[currentIndex].day.avghumidity
     } %&nbsp;
     <i class="fa-solid fa-wind"></i>&nbsp;${
-    data.forecast.forecastday[currentIndex].day.maxwind_kph
+      data.forecast.forecastday[currentIndex].day.maxwind_kph
     } km/h<br>
     <i class="fa-solid fa-mountain-sun"></i>&nbsp;${
-        data.forecast.forecastday[currentIndex].astro
-        .sunrise
-        }&nbsp;&nbsp;
+      data.forecast.forecastday[currentIndex].astro.sunrise
+    }&nbsp;&nbsp;
     <i class="fa-solid fa-cloud-moon"></i>&nbsp;${
-        data.forecast.forecastday[currentIndex].astro
-        .moonset
-        }
+      data.forecast.forecastday[currentIndex].astro.moonset
+    }
     <p><i class="fa-solid fa-clock"></i>&nbspTime updated: ${
-    data.current.last_updated
+      data.current.last_updated
     }</p>
     `;
 };
 
 const displayIcon = (text, display) => {
-  if (
-    text.includes("sunny") ||
-    text == "Sunny"
-  ) {
+  if (text.includes("sunny") || text == "Sunny") {
     display = `<i class="fa-solid fa-sun sunnyColor"></i>`;
   } else if (text.includes("rain")) {
     display = `<i class="fa-solid fa-cloud-showers-heavy rainnyColor"></i>`;
@@ -199,34 +201,40 @@ const displayIcon = (text, display) => {
     display = `<i class="fa-solid fa-cloud cloudyColor"></i>`;
   }
   return display;
-}
+};
 
 //Show weather icon for weekdays
 const showWeatherIcon = (arr) => {
   for (let i = 0; i < arr.length; i++) {
-    showIcon[i].innerHTML = displayIcon(arr[i].day.condition.text, showIcon[i].innerHTML)
+    showIcon[i].innerHTML = displayIcon(
+      arr[i].day.condition.text,
+      showIcon[i].innerHTML
+    );
   }
 };
 
 //Show weather icon of chosen day according to hour
 const showHrsWeatherIcon = (data, day) => {
-  let h = Math.round(Number(document.getElementById("hour").value)*0.24);
-  if(h == 24){
+  let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
+  if (h == 24) {
     h = 0;
   }
   let hourData = data.forecast.forecastday[day].hour[h];
   let hrsWeather = document.getElementById("hrsWeather");
-  hrsWeather.innerHTML = displayIcon(hourData.condition.text, hrsWeather.innerHTML);
-  };
+  hrsWeather.innerHTML = displayIcon(
+    hourData.condition.text,
+    hrsWeather.innerHTML
+  );
+};
 
 //Show Info of chosen hour
 const showInfo = (data, day) => {
-    let h = Math.round(Number(document.getElementById("hour").value)*0.24);
-    if(h == 24){
-      h = 0;
-    }
-    let hourData = data.forecast.forecastday[day].hour[h];
-    showHourInfo.innerHTML = `
+  let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
+  if (h == 24) {
+    h = 0;
+  }
+  let hourData = data.forecast.forecastday[day].hour[h];
+  showHourInfo.innerHTML = `
         <h4>${data.location.name} - ${data.location.country}</h4>
         <div class="row">
             <div class="col-lg-3 col-md-5 col-sm-12">
@@ -248,7 +256,7 @@ const showInfo = (data, day) => {
 
 //Show input range of hour
 const showHrsRange = () => {
-    showHourRange.innerHTML = `
+  showHourRange.innerHTML = `
         <input type="range" name="hour" id="hour" list="values">
         <datalist id="values">
             <option value="0" label="00:00"></option>
@@ -257,27 +265,26 @@ const showHrsRange = () => {
             <option value="75" label="18:00"></option>
             <option value="100" label="24:00"></option>
         </datalist>
-    `
-}
+    `;
+};
 
 //Add background color for selected btn
 const changeBgTempBtn = (index) => {
-  for(let i = 0; i< changeTempBtn.length; i++){
-    if (i == index){
+  for (let i = 0; i < changeTempBtn.length; i++) {
+    if (i == index) {
       changeTempBtn[i].classList.add("bg-warning");
-    }
-    else changeTempBtn[i].classList.remove("bg-warning");
+    } else changeTempBtn[i].classList.remove("bg-warning");
   }
-}
+};
 //Change temp (C <=> F)
-const changeTemptoF = (a)=> {
+const changeTemptoF = (a) => {
   let temp = document.getElementById("hrsTemp");
   temp.innerHTML = `${a}`;
- }
-const changeTemptoC = (b)=> {
+};
+const changeTemptoC = (b) => {
   let temp = document.getElementById("hrsTemp");
   temp.innerHTML = `${b}`;
-}
+};
 
 //Find button
 submitBtn.addEventListener("click", (e) => {
@@ -288,4 +295,4 @@ submitBtn.addEventListener("click", (e) => {
 
 window.onload = () => {
   document.getElementById("main").style.height = "1000px";
-}
+};
