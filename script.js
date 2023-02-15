@@ -1,3 +1,4 @@
+let mainPart = document.getElementById("main");
 let errMess = document.getElementById("errMess");
 let submitBtn = document.getElementById("submitBtn");
 let showIcon = document.getElementsByClassName("iconWeather");
@@ -22,7 +23,7 @@ function searchLocationWeather() {
           .then((data) => {
             console.log(data);
             //reset height of main tag
-            document.getElementById("main").style.height = "";
+            mainPart.style.height = "";
             showDay(data);//Show weekdays briefly
             showHrsRange();//Show hour range
             showInfo(data, 0);//Show info of day 1
@@ -54,6 +55,7 @@ function searchLocationWeather() {
           })
           .catch((err) => {
             console.log(err);
+            mainPart.style.height = "1000px";
             errMess.innerText =
               "No matching location found. Please type your location again!";
           });
@@ -231,6 +233,20 @@ const showHrsWeatherIcon = (data, day) => {
   );
 };
 
+//Change date format for info of chosen day
+const changeFormatDate2 = (date) => {
+  let newDate = new Date(date);
+  let options = {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour12 : true,
+    hour:  "2-digit",
+  };
+  return newDate.toLocaleDateString("en-us", options);
+};
+
 //Show Info of chosen hour
 const showInfo = (data, day) => {
   let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
@@ -254,7 +270,7 @@ const showInfo = (data, day) => {
             </h6>
             </div>
         </div>
-        <h4>${hourData.condition.text} . ${hourData.time}</h4>
+        <h4>${hourData.condition.text} . ${changeFormatDate2(hourData.time)}</h4>
     `;
 };
 
@@ -298,5 +314,5 @@ submitBtn.addEventListener("click", (e) => {
 });
 
 window.onload = () => {
-  document.getElementById("main").style.height = "1000px";
+  mainPart.style.height = "1000px";
 };
