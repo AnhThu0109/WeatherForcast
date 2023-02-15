@@ -6,6 +6,7 @@ let displayWeekDay = document.getElementById("showWeekDay");
 let activeDay = document.getElementsByClassName("active");
 let showHourInfo = document.getElementById("showInfo");
 let showHourRange = document.getElementById("showHourRange");
+let changeTempBtn = document.getElementsByClassName("changeTemp");
 
 //Search weather according to location
 function searchLocationWeather() {
@@ -231,7 +232,7 @@ const showInfo = (data, day) => {
             <div class="col-lg-3 col-md-5 col-sm-12">
             <h1>
                 <span id="hrsWeather"></span>
-                <span id="hrsTemp">${hourData.temp_c}</span><sup>o</sup>&nbsp;<button class="border-0 rounded-3 bg-white-30" onclick="changeTemptoF(${hourData.temp_c})">C</button> | <button class="border-0 rounded-3 bg-white-30" onclick="changeTemptoF(${hourData.temp_f})">F</button>
+                <span id="hrsTemp">${hourData.temp_c}</span><sup>o</sup>&nbsp;<button class="border-0 rounded-3 bg-white-30 changeTemp bg-warning" onclick="changeTemptoC(${hourData.temp_c}), changeBgTempBtn(0)">C</button> | <button class="border-0 rounded-3 bg-white-30 changeTemp" onclick="changeTemptoF(${hourData.temp_f}), changeBgTempBtn(1)">F</button>
             </h1>
             </div>
             <div class="col">
@@ -259,15 +260,24 @@ const showHrsRange = () => {
     `
 }
 
+//Add background color for selected btn
+const changeBgTempBtn = (index) => {
+  for(let i = 0; i< changeTempBtn.length; i++){
+    if (i == index){
+      changeTempBtn[i].classList.add("bg-warning");
+    }
+    else changeTempBtn[i].classList.remove("bg-warning");
+  }
+}
 //Change temp (C <=> F)
 const changeTemptoF = (a)=> {
- let temp = document.getElementById("hrsTemp");
- temp.innerHTML = `${a}`;
-}
+  let temp = document.getElementById("hrsTemp");
+  temp.innerHTML = `${a}`;
+ }
 const changeTemptoC = (b)=> {
   let temp = document.getElementById("hrsTemp");
   temp.innerHTML = `${b}`;
- }
+}
 
 //Find button
 submitBtn.addEventListener("click", (e) => {
