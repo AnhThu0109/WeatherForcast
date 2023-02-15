@@ -22,32 +22,45 @@ function searchLocationWeather() {
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
+
             //reset height of main tag
             mainPart.style.height = "";
+
             showDay(data);//Show weekdays briefly
             showHrsRange();//Show hour range
-            showInfo(data, 0);//Show info of day 1
+
+            let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
+              if (h == 24) {
+                h = 0;
+              }
+            showInfo(data, 0, h);//Show info of day 1
             showWeatherIcon(data.forecast.forecastday);//Show weather icon for weekdays
+
+            
             showHrsWeatherIcon(data, 0);//Show weather icon in info part of day 1
             
-            //Add event change for hour range
+            //Add event change for hour range          
             let inputRange = document.getElementById("hour");
             inputRange.addEventListener("change", () => {
-              showInfo(data, 0);
+              h = Math.round(Number(document.getElementById("hour").value) * 0.24);
+              if (h == 24) {
+                h = 0;
+              }
+              showInfo(data, 0, h);
               showHrsWeatherIcon(data, 0);
             });
 
             //Click day for detail
-            for (let i = 0; i < displayDays.length; i++) {
+            for (let i = 0; i < displayDays.length; i++) {             
               displayDays[i].addEventListener("click", () => {
                 addActiveClass(data, i);
                 showDetail(data, i);
-                showInfo(data, i);
+                showInfo(data, i, h);
                 showWeatherIcon(data.forecast.forecastday);
                 showHrsWeatherIcon(data, i);
                 //On change input range
                 inputRange.addEventListener("change", () => {
-                  showInfo(data, i);
+                  showInfo(data, i, h);
                   showHrsWeatherIcon(data, i);
                 });
               });
@@ -247,12 +260,8 @@ const changeFormatDate2 = (date) => {
   return newDate.toLocaleDateString("en-us", options);
 };
 
-//Show Info of chosen hour
-const showInfo = (data, day) => {
-  let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
-  if (h == 24) {
-    h = 0;
-  }
+
+const showInfo = (data, day, h) => {
   let hourData = data.forecast.forecastday[day].hour[h];
   showHourInfo.innerHTML = `
         <h4>${data.location.name} - ${data.location.country}</h4>
@@ -277,7 +286,7 @@ const showInfo = (data, day) => {
 //Show input range of hour
 const showHrsRange = () => {
   showHourRange.innerHTML = `
-        <input type="range" name="hour" id="hour" list="values">
+        <input type="range" name="hour" id="hour" list="values" value="">
         <datalist id="values">
             <option value="0" label="00:00"></option>
             <option value="25" label="06:00"></option>
