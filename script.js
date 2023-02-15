@@ -28,12 +28,14 @@ function searchLocationWeather() {
 
             showDay(data);//Show weekdays briefly
             showHrsRange();//Show hour range
+            
+            //Take local time of searching location and show in info + hrsrange
+            let date = new Date(data.location.localtime);
+            let hour = Math.round(date.getHours() * 100/24);
+            document.getElementById("hour").value = hour;
 
-            let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
-              if (h == 24) {
-                h = 0;
-              }
-            showInfo(data, 0, h);//Show info of day 1
+            showInfo(data, 0, date.getHours());//Show info of day 1
+            document.getElementById("realTime").innerHTML = `${changeFormatDate3(date) + ', ' + date.getHours() + ':' + date.getMinutes()}`;
             showWeatherIcon(data.forecast.forecastday);//Show weather icon for weekdays
 
             
@@ -41,6 +43,10 @@ function searchLocationWeather() {
             
             //Add event change for hour range          
             let inputRange = document.getElementById("hour");
+            let h = Math.round(Number(document.getElementById("hour").value) * 0.24);
+              if (h == 24) {
+                h = 0;
+              }
             inputRange.addEventListener("change", () => {
               h = Math.round(Number(document.getElementById("hour").value) * 0.24);
               if (h == 24) {
@@ -255,8 +261,20 @@ const changeFormatDate2 = (date) => {
     month: "short",
     day: "numeric",
     year: "numeric",
-    hour12 : true,
+    hour12 : false,
     hour:  "2-digit",
+    minute:  "2-digit",
+  };
+  return newDate.toLocaleDateString("en-us", options);
+};
+
+const changeFormatDate3 = (date) => {
+  let newDate = new Date(date);
+  let options = {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   };
   return newDate.toLocaleDateString("en-us", options);
 };
@@ -280,7 +298,7 @@ const showInfo = (data, day, h) => {
             </h6>
             </div>
         </div>
-        <h4>${hourData.condition.text} . ${changeFormatDate2(hourData.time)}</h4>
+        <h4>${hourData.condition.text} . <span id="realTime">${changeFormatDate2(hourData.time)}</span></h4>
     `;
 };
 
@@ -325,4 +343,6 @@ submitBtn.addEventListener("click", (e) => {
 
 window.onload = () => {
   mainPart.style.height = "1000px";
+  document.getElementById("location").value = "Ho Chi Minh";
+  searchLocationWeather();
 };
