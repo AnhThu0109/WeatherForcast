@@ -17,7 +17,7 @@ function searchLocationWeather() {
       keyword = keyword.trim();
       if (keyword != "") {
         fetch(
-          `http://api.weatherapi.com/v1/forecast.json?key=3f66991e4c8c4f16b9731107230802&q=${keyword}&days=6&aqi=yes&alerts=no`
+          `http://api.weatherapi.com/v1/forecast.json?key=3f66991e4c8c4f16b9731107230802&q=${keyword}&days=4&aqi=yes&alerts=no`
         )
           .then((response) => response.json())
           .then((data) => {
