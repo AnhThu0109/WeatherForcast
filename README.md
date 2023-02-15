@@ -1,7 +1,7 @@
 Student's name: Nguyen Ngoc Anh Thu
 # WeatherForcast
 Briefly introduction:
- - Weather forecast website using HTML, CSS, Bootstrap 5, JS and getting data from API: (http://api.weatherapi.com)
+ - WeatherForcast website using HTML, CSS, Bootstrap 5, JS and getting data from API: (http://api.weatherapi.com)
  - Outstanding Features: 
     + Search location to view weather forecast
     + Click to view detail data of a day including temperature, change of rain, moisture content, wind speed, sunrise time, moonset time and updated time of these data
